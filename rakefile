@@ -1,17 +1,6 @@
-#require 'rubygems'
-#require 'closure-compiler'
-
-HEADER = /((^\s*\/\/.*\n)+)/
-
 desc "Compress with Closure Compiler"
 task :build do
   system("java -jar compiler/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --js jcacher.js --js_output_file build/jcacher-min.js --externs externs/jcacher.js")
-  #source = File.read('jcacher.js')
-  #header = source.match(HEADER)
-  #min = Closure::Compiler.new.compress(source)
-  #File.open('jcacher-min.js', 'w') do |file|
-  #  file.write header[1].squeeze(' ') + min
-  #end
 end
 
 task :default => :build
