@@ -20,3 +20,9 @@ jCacher.clear();
 
 // Event handler for item removed
 jCacher.removed(callback);
+
+// Default cache item settings
+jCacher.CacheItem.defaults = {
+	sliding: 60, // sec
+	absolute: 60 // sec
+};

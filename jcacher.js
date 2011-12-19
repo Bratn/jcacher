@@ -103,7 +103,7 @@
                     return;
                 }
 
-                dependencyItem.dependencies.push(item.key);
+                dependencyItem.dependencies.push(key);
             }
         }
     };
