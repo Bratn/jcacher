@@ -59,9 +59,9 @@
     * @private
     */
     var RemoveReason = {
-        'EXPIRED': 'expired',
-        'REMOVED': 'removed',
-        'DEPENDENCY_CHANGED': 'dependencyChanged'
+        EXPIRED: 'expired',
+        REMOVED: 'removed',
+        DEPENDENCY_CHANGED: 'dependencyChanged'
     };
 
     // Public properties
