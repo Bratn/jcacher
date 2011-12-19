@@ -135,8 +135,12 @@
         // Decrease count
         jCacher.count--;
 
-        // Trigger a 'removed' event
-        events.trigger('removed', item, arguments[1] || jCacher.RemoveReason.REMOVED, arguments[2]);
+        // Trigger the 'removed' event
+        if (this._callbacks) {
+            for (var i = 0, l = this.calls.length; i < l; i++) {
+                this._callbacks[i].apply(jCacher, item, arguments[1] || jCacher.RemoveReason.REMOVED, arguments[2]);
+            }
+        }
 
         // Go through and remove all dependencies
         for (var i = 0, l = item.dependencies.length; i < l; i++) {
@@ -156,7 +160,8 @@
     // Event handler for the 'removed' event. Occurs
     // when an item is removed from the cache.
     jCacher.removed = function (callback) {
-        events.bind('removed', callback, jCacher);
+        var calls = this._callbacks || (this._callbacks = []);
+        calls.push(callback);
     };
 
     // jCacher Item
@@ -220,50 +225,5 @@
             }
         }
     };
-
-    // Utilities and helpers
-    // --------------
-
-    // Event manager for bind and trigger.
-    var events = {
-        bind: function (ev, callback, context) {
-            var calls = this._callbacks || (this._callbacks = {});
-            var list = calls[ev] || (calls[ev] = []);
-            list.push([callback, context]);
-            return this;
-        },
-        trigger: function (eventName) {
-            var list, calls, ev, callback, args;
-            var both = 2;
-            if (!(calls = this._callbacks)) return this;
-            while (both--) {
-                ev = both ? eventName : 'all';
-                if (list = calls[ev]) {
-                    for (var i = 0, l = list.length; i < l; i++) {
-                        if (!(callback = list[i])) {
-                            list.splice(i, 1); i--; l--;
-                        } else {
-                            args = both ? Array.prototype.slice.call(arguments, 1) : arguments;
-                            callback[0].apply(callback[1] || this, args);
-                        }
-                    }
-                }
-            }
-            return this;
-        }
-    };
-
-    // indexOf fallback for pre 70's browsers and IE
-    if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function (what, i) {
-            i = i || 0;
-            var L = this.length;
-            while (i < L) {
-                if (this[i] === what) return i;
-                ++i;
-            }
-            return -1;
-        }
-    }
 
 }).call(this);
