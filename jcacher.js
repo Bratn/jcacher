@@ -1,7 +1,7 @@
-//     jCacher 2.0
-//     (c) 2012 Andreas Brantmo.
-//     jCacher is freely distributable under the MIT license.
-//     http://jcacher.bratn.se/
+// jCacher 2.0 - NOT STABLE YET!
+// (c) 2012 Andreas Brantmo.
+// jCacher is freely distributable under the MIT license.
+// http://jcacher.bratn.se/
 (function () {
 
     'use strict';
