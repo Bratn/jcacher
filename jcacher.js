@@ -197,9 +197,9 @@
 
     // Default settings for a cache item
     jCacher.CacheItem.defaults = {
-        sliding: 60, // seonds
-        absolute: 60, // seconds
-        removed: jCacher.removed
+        'sliding': 60, // seonds
+        'absolute': 60, // seconds
+        'removed': jCacher.removed
     };
 
     // Cache item prototype
