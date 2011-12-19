@@ -9,8 +9,16 @@
     /**
     * Reference to the current root
     * @type Object
+    * @private
     */
     var root = this;
+    
+    /**
+    * Reference to 'undefined'
+    * @type Object
+    * @private
+    */
+    var undef;
 
     /**
     * Main object, attached on the root or 'exports' object
@@ -23,8 +31,8 @@
     // Export the jCacher object for **Node.js** and **"CommonJS"**, with
     // backwards-compatibility for the old `require()` API. If we're not in
     // CommonJS, add `jCacher` to the global object.
-    if (typeof exports !== 'undefined') {
-        if (typeof module !== 'undefined' && module.exports) {
+    if (typeof exports !== undef) {
+        if (typeof module !== undef && module.exports) {
             exports = module.exports = jCacher;
         }
         exports.jCacher = jCacher;
@@ -128,7 +136,7 @@
         var item = (keyOrItem instanceof jCacher.CacheItem) ? keyOrItem : items[keyOrItem];
 
         // Abort and return false if the item wasn't found.
-        if (item == 'undefined') return false;
+        if (item === undef) return false;
 
         // Remove the item from the cache
         delete items[item.key];
@@ -175,8 +183,8 @@
     jCacher.CacheItem = function (key, obj) {
         var opts = jCacher.CacheItem.defaults;
         if (typeof arguments[2] == 'Object') {
-            opts.sliding = arguments[2].sliding != 'undefined' ? arguments[2].sliding : opts.sliding;
-            opts.absolute = arguments[2].absolute != 'undefined' ? arguments[2].absolute : opts.absolute;
+            opts.sliding = arguments[2].sliding !== undef ? arguments[2].sliding : opts.sliding;
+            opts.absolute = arguments[2].absolute !== undef ? arguments[2].absolute : opts.absolute;
             opts.removed = arguments[2].removed ? arguments[2].removed : opts.removed;
         }
         this.key = key;
