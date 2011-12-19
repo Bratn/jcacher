@@ -1,6 +1,10 @@
-jCacher - small (<1.5kb) javascript caching utility
+** jCacher - small javascript caching utility **
 
-Suited for single-page apps. No external dependencies. Compatible with jQuery, Prototype, Closure Library, YUI, MooTools, Dojo, requireJs etc.
+Less than 1kb compiled and gzipped
+
+Suited for single-page apps. No external dependencies. 
+
+Compatible with jQuery, Prototype, Closure Library, YUI, MooTools, Dojo, requireJS etc.
 
 // Add item to the cache
 jCacher.add(key, obj [, options, dependencies]);
