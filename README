@@ -1,0 +1,18 @@
+jCacher - small javascript caching utility
+
+No external dependencies. Compatible with jQuery, Prototype, Closure Library, YUI, MooTools, Dojo, requireJs etc.
+
+// Add item to the cache
+jCacher.add(key, obj [, options, dependencies]);
+
+// Get item from the cache
+jCacher.get(key);
+
+// Remove item from the cache
+jCacher.remove(key);
+
+// Clear the entire cache
+jCacher.clear();
+
+// Event handler for item removed
+jCacher.removed(callback);
