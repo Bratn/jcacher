@@ -44,6 +44,17 @@
     * @private
     */
     var items = [];
+    
+    /**
+    * Predefined remove reasons.
+    * @enum {string}
+    * @private
+    */
+    var RemoveReason = {
+        'EXPIRED': 'expired',
+        'REMOVED': 'removed',
+        'DEPENDENCY_CHANGED': 'dependencyChanged'
+    };
 
     // Public properties
     // --------------
@@ -59,16 +70,6 @@
     * @type string
     */
     jCacher.count = 0;
-
-    /**
-    * Predefined remove reasons.
-    * @enum {string}
-    */
-    jCacher.RemoveReason = {
-        'EXPIRED': 'expired',
-        'REMOVED': 'removed',
-        'DEPENDENCY_CHANGED': 'dependencyChanged'
-    };
 
     // Public functions
     // --------------
@@ -102,7 +103,7 @@
                 // If a dependency points to an item not in the cache
                 // the current item should be invalidated directly.
                 if (!dependencyItem) {
-                    jCacher.remove(item, jCacher.RemoveReason.DEPENDENCY_CHANGED);
+                    jCacher.remove(item, RemoveReason.DEPENDENCY_CHANGED);
                     return;
                 }
 
@@ -138,13 +139,13 @@
         // Trigger the 'removed' event
         if (this._callbacks) {
             for (var i = 0, l = this.calls.length; i < l; i++) {
-                this._callbacks[i].apply(jCacher, item, arguments[1] || jCacher.RemoveReason.REMOVED, arguments[2]);
+                this._callbacks[i].apply(jCacher, item, arguments[1] || RemoveReason.REMOVED, arguments[2]);
             }
         }
 
         // Go through and remove all dependencies
         for (var i = 0, l = item.dependencies.length; i < l; i++) {
-            jCacher.remove(item.dependencies[i], jCacher.RemoveReason.DEPENDENCY_CHANGED);
+            jCacher.remove(item.dependencies[i], RemoveReason.DEPENDENCY_CHANGED);
         }
 
         return true;
@@ -220,7 +221,7 @@
             // If no expiration value is set the item will remain in cache.  
             if (exp !== null) {
                 self._timeout = setTimeout(function () {
-                    jCacher.remove(self, jCacher.RemoveReason.EXPIRED);
+                    jCacher.remove(self, RemoveReason.EXPIRED);
                 }, exp * 1000);
             }
         }
