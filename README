@@ -1,6 +1,6 @@
 ** jCacher - small javascript caching utility **
 
-Less than 1kb compiled and gzipped
+Less than 0.7kb compiled and gzipped
 
 Suited for single-page apps. No external dependencies. 
 
