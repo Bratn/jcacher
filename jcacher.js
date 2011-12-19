@@ -73,12 +73,6 @@
     */
     jCacher.VERSION = '2.0';
 
-    /**
-    * Number of items in the cache.
-    * @type string
-    */
-    jCacher.count = 0;
-
     // Public functions
     // --------------
 
@@ -91,14 +85,8 @@
     */
     jCacher.add = function (key, obj, options, dependencies) {
 
-        // Create a CacheItem if the passed object isn't already one
-        var item = (obj instanceof jCacher.CacheItem) ? obj : new jCacher.CacheItem(key, obj, options);
-
-        // Increase count if the item is new
-        jCacher.count += items[key] ? 0 : 1;
-
-        // Put the item in the cache array
-        items[key] = item;
+        // Create a CacheItem if the passed object isn't already one, and add it to the cache
+        var item = items[key] = (obj instanceof jCacher.CacheItem) ? obj : new jCacher.CacheItem(key, obj, options);
 
         // If dependencies are specified, go through and attach them
         // to each cache item.
@@ -140,9 +128,6 @@
 
         // Remove the item from the cache
         delete items[item.key];
-
-        // Decrease count
-        jCacher.count--;
 
         // Trigger the 'removed' event
         if (this._callbacks) {

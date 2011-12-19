@@ -9,9 +9,6 @@ var jCacher;
 /** @type {string} */
 jCacher.VERSION;
 
-/** @type {Number} */
-jCacher.count;
-
 /**
  * @param {string} key
  * @param {Object} obj
